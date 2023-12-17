@@ -1,5 +1,3 @@
-//Non sono riuscito ad aggiungere la proprietà opzionale al prodotto e far funzionare il codice di modifica PUT
-
 // Funzione per aggiungere il nome del prodotto nella pagina dettagli
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname.includes("dettagli.html")) {
@@ -60,18 +58,15 @@ function createProductCard(product) {
     productPrice.classList.add("card-subtitle", "mb-2", "text-muted");
     productPrice.textContent = `Price: $${product.price}`;
 
-    const optionalParams = document.createElement("p");
-    optionalParams.classList.add("card-text");
-    optionalParams.textContent = `Opzionali: ${product.optionalParams || ""}`;
-
     cardBody.appendChild(productName);
     cardBody.appendChild(productDescription);
     cardBody.appendChild(productBrand);
     cardBody.appendChild(productPrice);
-    cardBody.appendChild(optionalParams);
 
     card.appendChild(productImage);
     card.appendChild(cardBody);
+
+    console.log(card);
 
     return card;
   }
@@ -143,6 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then((response) => response.json())
       .then((data) => {
         // Gestisci i dati ottenuti
+        console.log(data);
         const productContainer = document.querySelector("#productContainer");
         displayProducts(data);
       })
@@ -254,14 +250,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const productBrandInput = document.querySelector("#productBrandEdit");
     const productImageUrlInput = document.querySelector("#productImageUrlEdit");
     const productPriceInput = document.querySelector("#productPriceEdit");
-    const optionalParamsInput = document.querySelector("#optionalParamsEdit");
+    const productId = document.querySelector("#productId");
 
     productNameInput.value = product.name;
     productDescriptionInput.value = product.description;
     productBrandInput.value = product.brand;
     productImageUrlInput.value = product.imageUrl;
     productPriceInput.value = product.price;
-    optionalParamsInput.value = product.optionalParams;
+    productId.value = product._id;
 
     // Mostra il pulsante di modifica
     const editProductButton = document.querySelector(".editProductButton");
@@ -272,21 +268,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const editProductForm = document.querySelector("#editProductForm");
   editProductForm.addEventListener("submit", (event) => {
     event.preventDefault();
+    console.log("click");
 
     // Chiamare la funzione per inviare la richiesta di modifica
+    const productId = document.querySelector("#productId").value;
     inviaRichiestaModifica(productId);
   });
 
   // Funzione di invio richiesta di modifica
   function inviaRichiestaModifica(productId) {
     const productNameInput = document.querySelector("#productNameEdit");
-    const productDescriptionInput = document.querySelector(
-      "#productDescriptionEdit"
-    );
+    const productDescriptionInput = document.querySelector("#productDescriptionEdit");
     const productBrandInput = document.querySelector("#productBrandEdit");
     const productImageUrlInput = document.querySelector("#productImageUrlEdit");
     const productPriceInput = document.querySelector("#productPriceEdit");
-    const optionalParamsInput = document.querySelector("#optionalParamsEdit");
 
     const productData = {
       name: productNameInput.value,
@@ -294,12 +289,11 @@ document.addEventListener("DOMContentLoaded", () => {
       brand: productBrandInput.value,
       imageUrl: productImageUrlInput.value,
       price: parseFloat(productPriceInput.value),
-      optionalParams: optionalParamsInput.value,
     };
 
     // Inviare la richiesta di modifica
     fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`, {
-      method: "PUT", // Usa il metodo PUT per le richieste di modifica
+      method: "PUT",
       headers: {
         Authorization:
           "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc4NjIzNTI2NzYxNDAwMTgzYzJlZWYiLCJpYXQiOjE3MDIzODgyNzcsImV4cCI6MTcwMzU5Nzg3N30.IvxUsVeZgNcFsT1Oqjh0X4EYgwBfKWQxqBwtrQ4znKg",
@@ -309,8 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Gestisci la risposta del server
-        console.log("Prodotto modificato con successo", data);
+        alert("Prodotto modificato con successo", data);
 
         // Aggiorna la pagina index dopo la modifica
         window.location.reload();
@@ -319,9 +312,6 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("Errore durante la modifica del prodotto:", error);
       });
   }
-
-  // Chiamare la funzione per inviare la richiesta di modifica
-  inviaRichiestaModifica(productName);
 });
 
 //PAGINA CREATOR PRODOTTI
@@ -342,7 +332,6 @@ document.addEventListener("DOMContentLoaded", function () {
       const productBrand = document.querySelector("#productBrand").value;
       const productImageUrl = document.querySelector("#productImageUrl").value;
       const productPrice = document.querySelector("#productPrice").value;
-      const optionalParams = document.querySelector("#optionalParams").value;
 
       // Crea un oggetto con i dati raccolti
       const productData = {
@@ -351,7 +340,6 @@ document.addEventListener("DOMContentLoaded", function () {
         brand: productBrand,
         imageUrl: productImageUrl,
         price: parseFloat(productPrice),
-        optionalParams: optionalParams ? optionalParams : undefined,
       };
 
       console.log(productData);
