@@ -15,76 +15,106 @@
   </head>
   <body class="bg-dark text-white">
     <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Modifica prodotto</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body text-black">
-        <div class="form-group">
-          <label for="productName">Nome Prodotto</label>
-          <input type="text" class="form-control" id="productName" required />
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Modifica prodotto
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body text-black">
+            <form id="editProductForm">
+              <div class="form-group">
+                <label for="productName">Nome Prodotto</label>
+                <input
+                  type="text"
+                  id="productNameEdit"
+                  placeholder="Product Name"
+                  required
+                />
+              </div>
+              <div class="form-group has-validation">
+                <label for="productDescription">Descrizione Prodotto</label>
+                <input
+                  type="text"
+                  id="productDescriptionEdit"
+                  placeholder="Product Description"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="productBrand">Brand Prodotto</label>
+                <input
+                  type="text"
+                  id="productBrandEdit"
+                  placeholder="Product Brand"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="productImageUrl">URL Immagine Prodotto</label>
+                <input
+                  type="text"
+                  id="productImageUrlEdit"
+                  placeholder="Product Image URL"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="productPrice">Prezzo Prodotto</label>
+                <input
+                  type="number"
+                  id="productPriceEdit"
+                  placeholder="Product Price"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="optionalParams">Parametro Opzionale</label>
+                <input
+                  type="text"
+                  id="optionalParamsEdit"
+                  placeholder="Optional Params"
+                />
+              </div>
+              <div class="invalid-feedback">Please select a valid state.</div>
+              <button type="submit" class="btn btn-success mt-3">
+                Modifica Prodotto
+              </button>
+              <button
+                type="reset"
+                class="btn btn-danger mt-3"
+                onclick="resetForm()"
+              >
+                Reset
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
         </div>
-        <div class="form-group has-validation">
-          <label for="productDescription">Descrizione Prodotto</label>
-          <input
-            type="text"
-            class="form-control"
-            id="productDescription"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="productBrand">Brand Prodotto</label>
-          <input
-            type="text"
-            class="form-control"
-            id="productBrand"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="productImageUrl">URL Immagine Prodotto</label>
-          <input
-            type="text"
-            class="form-control"
-            id="productImageUrl"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="productPrice">Prezzo Prodotto</label>
-          <input
-            type="number"
-            class="form-control"
-            id="productPrice"
-            required
-          />
-        </div>
-        <div class="form-group">
-          <label for="optionalParams">Parametro Opzionale</label>
-          <input type="text" class="form-control" id="optionalParams" />
-        </div>
-        <div class="invalid-feedback">
-          Please select a valid state.
-        </div>
-        <!-- Aggiungi qui altri campi per i parametri obbligatori e facoltativi -->
-        <button type="submit" class="btn btn-success mt-3">
-          Modifica Prodotto
-        </button>
-        <button type="reset" class="btn btn-danger mt-3" onclick="resetForm()">
-          Reset
-        </button>
-      </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
-</div>
     <div class="container" style="background-color: #013d5f">
       <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -132,26 +162,6 @@
       </main>
       <footer></footer>
     </div>
-    <!-- Modal -->
-<div class="modal fade" id="exampleModalOne" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
